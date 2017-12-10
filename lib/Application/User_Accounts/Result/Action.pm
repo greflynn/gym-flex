@@ -9,13 +9,15 @@ use warnings;
 
 use base 'DBIx::Class::Core';
 __PACKAGE__->load_components("InflateColumn::DateTime");
-__PACKAGE__->table("Actions");
+__PACKAGE__->table("Action");
 __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "name",
   { data_type => "varchar", is_nullable => 1, size => 50 },
 );
+__PACKAGE__->set_primary_key("id");
+
 
 
 # Created by DBIx::Class::Schema::Loader v0.07047 @ 2017-07-17 12:53:45

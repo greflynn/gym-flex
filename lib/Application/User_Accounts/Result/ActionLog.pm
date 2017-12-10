@@ -24,6 +24,8 @@ __PACKAGE__->add_columns(
   "ip_address",
   { data_type => "varchar", is_nullable => 1, size => 25 },
 );
+__PACKAGE__->set_primary_key("id");
+
 
 
 # Created by DBIx::Class::Schema::Loader v0.07047 @ 2017-07-17 12:53:45

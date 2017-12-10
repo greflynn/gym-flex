@@ -12,15 +12,22 @@ sub startup {
 
    $self->plugin('RemoteAddr');
 
-   $self->secrets(['New Session {SSHA512}7HiYMvkAX9cOSjFhZKGepFKVlBdoWskRVjwHZ8G6Xj9I5JnXNytTWW3VyDr/Chjyy9izPPtmarXWff+8TMnbFuX63jk= Volusia county Government',
-      'Validation Volusia County Government LeYTmFPhw3qZmguKrPTZhWnsLeYTmFPhw3qJmqCjyGZmguK']);
+   $self->secrets(['New Session {SSHA512}7HiYMvkAX9cOSjFhZKGepFKVlBdoWskRVjwHZ8G6Xj9I5JnXNytTWW3VyDr/Chjyy9izPPtmarXWff+8TMnbFuX63jk= AG Development',
+      'Validation AG Development LeYTmFPhw3qZmguKrPTZhWnsLeYTmFPhw3qJmqCjyGZmguK']);
 
     $self->app->sessions->default_expiration('600');# Expiration reduced to 10 Minutes
 
   # Load configuration from hash returned by "my_app.conf"
   my $config = $self->plugin('Config');
 
-  my $application_db = Application::User_Accounts->connect('DBI:ODBC:DRIVER={SQL Server};SERVER=10.6.10.181;DATABASE=Beach_App;, BeachUser, SurfsUp');
+  my $host = 'localhost:8080';
+  my $port = '3306';
+  my $database = 'gym-flex';
+  my $uid = 'root';
+  my $pwd = 'MySqlPass!?';
+  my $dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
+
+  my $application_db = Application::User_Accounts->connect($dsn);
     $self->helper(application_db => sub { return $application_db; });
 
     $self->helper(log_users_action => sub {

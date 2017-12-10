@@ -15,8 +15,6 @@ __PACKAGE__->add_columns(
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "uid",
   { data_type => "varchar", is_nullable => 0, size => 11 },
-  "employee_id",
-  { data_type => "varchar", is_nullable => 1, size => 50 },
   "first_name",
   { data_type => "varchar", is_nullable => 1, size => 50 },
   "last_name",
@@ -36,7 +34,7 @@ __PACKAGE__->add_columns(
   "failed_recoveries",
   { data_type => "integer", is_nullable => 1 },
 );
-__PACKAGE__->set_primary_key("uid");
+__PACKAGE__->set_primary_key("id");
 
 
 # Created by DBIx::Class::Schema::Loader v0.07047 @ 2017-07-17 12:53:45
