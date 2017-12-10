@@ -2,6 +2,7 @@ package Application;
 use Mojo::Base 'Mojolicious';
 use Application::User_Accounts;
 use DateTime;
+use General::Tools;
 
 # This method will run once at server start
 sub startup {
@@ -79,6 +80,18 @@ sub startup {
     });
 
   $self->plugin('PODRenderer') if $config->{perldoc};
+=pod
+  my $hashed_pass = hash_this('Passw0rd!?');
+  $self->application_db->resultset('Employee')->create({
+    first_name => 'Greg',
+    last_name =>  'Flynn',
+    screen_name => 'gflynn',
+    uid => '1',
+    email => 'greflynn.inc@gmail.com',
+    role => '3',
+    password => $hashed_pass
+  });
+=cut
 
   my $r = $self->routes;
 
