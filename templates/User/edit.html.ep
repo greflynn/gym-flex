@@ -1,0 +1,39 @@
+% title 'User Edit';
+% if(!defined $self->session('logged_in')){ $self->log_users_action(8, 'Employee Edit') };
+
+% if(defined(stash('user'))) {
+  % my $role = '';
+  % if($user->role eq 'RID00000001') {
+  %      $role = 'BASIC'
+  % }
+  % else {
+  %     $role = 'ADMINISTRATOR'
+  % }
+
+  <h1>
+  <%= $user->first_name %>  <%= $user->last_name %> | <%= $user->screen_name %> (<%= $role %>)
+  </h1>
+  <%= $user->uid %> | <%= $user->employee_id %> <br>
+  %= $user->email
+  <br><br>
+
+  %= form_for 'user_edit' => (metod => 'POST') => begin
+    <select name="role" class="form-control">
+      % for my $role (@$roles) {
+        <option value="<%= $role->role_id %>"> <%= $role->title %> </option>
+      % }
+    </select>
+
+    <br><br>
+
+    %= hidden_field user_id => $user->uid
+
+    <div class="row" align="center">
+      %= submit_button 'Save Changes', class => 'btn btn-success'
+    </div>
+  % end
+% }
+
+
+
+TODO: Record actions and create log here.

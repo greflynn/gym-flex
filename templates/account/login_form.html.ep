@@ -1,0 +1,16 @@
+% title 'Login';
+
+<div style="padding: 10px">
+ %= form_for 'do_login' => (method => 'POST') => begin
+		<h1>Please Verify Your Identity</h1>
+		<fieldset>
+				<div class="form-group" align="center">
+        <input class="form-control" style="text-align: center;" placeholder="User Name" name="user_name" required><br>
+				<input class="form-control" style="text-align: center;" type="password" placeholder="Enter The Password" name="password" required MAXLENGTH="25"><br>
+				%= submit_button 'Log in', class => 'btn btn-success'
+        <br><br>
+        %= link_to 'Forgot your password?' => 'forgot_password_form'
+			</div>
+		</fieldset>
+  %end
+</div>

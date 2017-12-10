@@ -1,0 +1,45 @@
+% title 'Add User';
+% if(!defined $self->session('logged_in')){ $self->log_users_action(8, 'Add Employee Form') };
+
+ %= form_for 'user_add' => (method => 'POST') => begin
+
+    <br>
+
+    %= label_for first_name => 'First Name'
+    %= text_field first_name => (class => 'form-control')
+
+    <br>
+
+    %= label_for last_name => 'Last Name'
+    %= text_field last_name => (class => 'form-control')
+
+    <br>
+
+    %= label_for screen_name => 'Screen Name'
+    %= text_field screen_name => (class => 'form-control')
+
+    <br>
+
+    %= label_for employee_id => 'Employee ID'
+    %= text_field employee_id => (class => 'form-control')
+
+    <br>
+
+    %= label_for email => 'Email'
+    %= email_field email => (class => 'form-control')
+
+    <br>
+
+    %= label_for role => 'Role'
+    <select name="role" class="form-control">
+      % for my $role (@$roles) {
+        <option value="<%= $role->role_id %>"> <%= $role->title %> </option>
+      % }
+    </select>
+    <br><br>
+
+    <div class="row" align="center">
+      %= submit_button 'Submit', class => 'btn btn-success'
+    </div>
+
+ % end

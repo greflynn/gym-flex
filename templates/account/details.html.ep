@@ -1,0 +1,18 @@
+% title 'Account Details';
+
+% if(!defined $self->session('logged_in')){ $self->log_users_action(8, 'Account Details') };
+
+% if(defined(stash('user'))) {
+  <h1>
+  <%= $user->first_name %>  <%= $user->last_name %> | <%= $user->screen_name %>
+  </h1>
+  <%= $user->employee_id %>
+  <br>
+  %= $user->email
+  <br><br>
+    %= form_for 'account_edit_form' => (method => 'GET') => begin
+      %= submit_button 'Edit', class => 'btn btn-success'
+      %= hidden_field user_id => $user->uid
+    % end
+  <br>
+% }

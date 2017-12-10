@@ -1,0 +1,51 @@
+% title 'User Details';
+% if (defined($self->session('logged_in'))) {
+  % $self->log_users_action(8, 'Employee Details: '.$user->uid);
+% } else {
+    $self->log_users_action(8, 'Employee Details');
+% }
+
+% if(defined(stash('user'))) {
+  % my $role = '';
+  % if($user->role eq 'RID00000001') {
+  %      $role = 'BASIC'
+  % }
+  % else {
+  %     $role = 'ADMINISTRATOR'
+  % }
+
+  <h1>
+  <%= $user->first_name %>  <%= $user->last_name %> | <%= $user->screen_name %> (<%= $role %>)
+  </h1>
+  <%= $user->uid %> | <%= $user->employee_id %> <br>
+  %= $user->email
+  <br><br>
+
+   % if(defined(stash('users_actions'))) {
+   <button type="button" class="btn btn-info form-control" data-toggle="collapse" data-target="#demo">Action Log</button>
+   <div id="demo" class="collapse">
+     <table class="table table-striped" style="display: block; height: 350px; overflow-y: scroll;">
+        <thead>
+        <tr>
+         <th>IP Address</th>
+         <th>Action</th>
+         <th>Additional Info</th>
+         <th>Date Time</th>
+        </tr>
+        </thead>
+        <tbody >
+        % for my $action (@$users_actions) {
+          % my $action_name = $self->application_db->resultset('Action')->search({id => $action->action_id});
+          %  $action_name = $action_name->first;
+          <tr>
+            <td><%= $action->ip_address %></td>
+            <td><%= $action_name->name %></td>
+            <td><%= $action->additional_info %></td>
+            <td><%= $action->date_time %></td>
+          </tr>
+        % }
+          </tbody>
+        </table>
+      </div>
+   % }
+% }

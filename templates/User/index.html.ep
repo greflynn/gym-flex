@@ -1,0 +1,62 @@
+% title 'User List';
+% if(!defined $self->session('logged_in')){ $self->log_users_action(8, 'User Index') };
+<h1>Users</h1>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Role </th>
+    </tr>
+  </thead>
+  <tbody>
+  % for my $user (@$users) {
+    <tr>
+      <td>
+        <%= $user->first_name %>
+      </td>
+      <td>
+        <%= $user->last_name %>
+      </td>
+      <td>
+        <%= $user->email %>
+      </td>
+      <td>
+      % if($user->role eq 'RID00000001'){
+          BASIC
+      % }
+      % else {
+        ADMINISTRATOR
+      % }
+
+      </td>
+
+      <td>
+        %= form_for 'user_edit_form' => (method => 'GET') => begin
+          %= submit_button 'Edit', class => 'btn btn-success'
+          %= hidden_field user_id => $user->uid
+        % end
+      </td>
+
+      <td>
+        %= form_for 'user_details' => (method => 'POST') => begin
+          %= submit_button 'Details', class => 'btn btn-info'
+          %= hidden_field user_id => $user->uid
+        % end
+      </td>
+
+      <td>
+      <form action="/admin/delete_user" onsubmit="return confirm('Are you sure you want to delete this user?');">
+          %= submit_button 'Delete', class => 'btn btn-danger'
+          %= hidden_field user_id => $user->uid
+      </form>
+      </td>
+    </tr>
+  % }
+  </tbody>
+  </table>
+
+<div class="row" align="center">
+  %= link_to Add => 'user_add_form', class => 'btn btn-success form-control'
+</div>

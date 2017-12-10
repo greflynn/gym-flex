@@ -1,0 +1,21 @@
+% title 'Account Recovery';
+
+%= form_for 'authenticate_account_recovery' => (method => 'POST') => begin
+  <br>
+  %= label_for 'temporary_code' => 'Temporary Code'
+  %= text_field 'temporary_code', class => 'form-control'
+  <br>
+  %= label_for 'user_id' => 'User ID'
+  %= number_field 'user_id', class => 'form-control'
+  <br>
+  %= label_for 'new_password' => 'New Password'
+  %= password_field 'new_password', class => 'form-control'
+  <br>
+  %= label_for 'verify_password' => 'Verify Password'
+  %= password_field 'verify_password', class => 'form-control'
+
+  <br><br>
+  <div class="row" align="center">
+    %= submit_button 'Recover Account', class => 'btn btn-success'
+  </div>
+% end

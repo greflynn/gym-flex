@@ -1,0 +1,38 @@
+% title 'Account Edit';
+% if(!defined $self->session('logged_in')){ $self->log_users_action(8, 'Account Edit Form') };
+
+%= form_for 'account_edit' => (method => 'POST') => begin
+
+ <br>
+
+  %= label_for first_name => 'First Name'
+  %= text_field first_name => $user->first_name, class => 'form-control'
+
+  <br>
+
+  %= label_for last_name => 'Last Name'
+  %= text_field last_name => $user->last_name, class => 'form-control'
+
+  <br>
+
+  %= label_for email => 'Email'
+  %= email_field email => $user->email, class => 'form-control'
+
+  <br>
+
+  %= label_for screen_name => 'Screen Name'
+  %= text_field screen_name => $user->screen_name, class => 'form-control'
+
+  <br>
+
+  %= link_to 'Change Password' => 'change_password_form'
+
+  <br><br>
+
+  %= hidden_field user_id => $user->uid
+
+  <div class="row" align="center">
+    %= submit_button 'Save Changes', class => 'btn btn-success'
+  </div>
+
+% end
