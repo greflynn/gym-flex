@@ -6,7 +6,6 @@
   <h1>
   <%= $user->first_name %>  <%= $user->last_name %> | <%= $user->screen_name %>
   </h1>
-  <%= $user->employee_id %>
   <br>
   %= $user->email
   <br><br>

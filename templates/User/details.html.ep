@@ -17,7 +17,6 @@
   <h1>
   <%= $user->first_name %>  <%= $user->last_name %> | <%= $user->screen_name %> (<%= $role %>)
   </h1>
-  <%= $user->uid %> | <%= $user->employee_id %> <br>
   %= $user->email
   <br><br>
 
@@ -37,12 +36,14 @@
         % for my $action (@$users_actions) {
           % my $action_name = $self->app->application_db->resultset('Action')->search({id => $action->action_id});
           %  $action_name = $action_name->first;
-          <tr>
-            <td><%= $action->ip_address %></td>
-            <td><%= $action_name->name %></td>
-            <td><%= $action->additional_info %></td>
-            <td><%= $action->date_time %></td>
-          </tr>
+          % if($action_name) {
+            <tr>
+              <td><%= $action->ip_address %></td>
+              <td><%= $action_name->name %></td>
+              <td><%= $action->additional_info %></td>
+              <td><%= $action->date_time %></td>
+            </tr>
+          % }
         % }
           </tbody>
         </table>
