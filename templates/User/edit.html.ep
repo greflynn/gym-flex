@@ -3,7 +3,7 @@
 
 % if(defined(stash('user'))) {
   % my $role = '';
-  % if($user->role eq 'RID00000001') {
+  % if($user->role eq '1') {
   %      $role = 'BASIC'
   % }
   % else {
@@ -13,7 +13,6 @@
   <h1>
   <%= $user->first_name %>  <%= $user->last_name %> | <%= $user->screen_name %> (<%= $role %>)
   </h1>
-  <%= $user->uid %> | <%= $user->employee_id %> <br>
   %= $user->email
   <br><br>
 

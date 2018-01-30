@@ -23,7 +23,7 @@
         <%= $user->email %>
       </td>
       <td>
-      % if($user->role eq 'RID00000001'){
+      % if($user->role eq '1'){
           BASIC
       % }
       % else {
