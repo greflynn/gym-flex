@@ -102,9 +102,10 @@ sub startup {
 =cut
 
   my $r = $self->routes;
+    $r = $r->under('/gym-flex');
 
-  $r->get('/gym-flex')->name('login_form')->to(template => 'account/login_form');
-  $r->post('/gym-flex')->name('do_login')->to('Account#login');
+  $r->get('/login')->name('login_form')->to(template => 'account/login_form');
+  $r->post('/login')->name('do_login')->to('Account#login');
 
   $r->route('/logout')->name('do_logout')->to(cb => sub {
    my $self = shift;
