@@ -56,14 +56,14 @@
         % if ($logged_in) {
           % if ($self->session('role') eq 'RID00000002') {
             <li class="active">
-              %= link_to 'Home' => 'user_dashboard'
+              %= link_to 'Home' => 'workout_dashboard'
             </li>
             <li>
                 %= link_to 'Users' => 'user_index'
             </li>
           % } else {
             <li class="active">
-              %= link_to 'Home' => 'form_index'
+              %= link_to 'Home' => 'workout_dashboard'
             </li>
           % }
           <li>

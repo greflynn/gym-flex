@@ -35,7 +35,7 @@
         </thead>
         <tbody >
         % for my $action (@$users_actions) {
-          % my $action_name = $self->application_db->resultset('Action')->search({id => $action->action_id});
+          % my $action_name = $self->app->application_db->resultset('Action')->search({id => $action->action_id});
           %  $action_name = $action_name->first;
           <tr>
             <td><%= $action->ip_address %></td>

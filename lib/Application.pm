@@ -5,6 +5,22 @@ use DateTime;
 use General::Tools;
 
 # This method will run once at server start
+
+has application_db => sub {
+=pod
+  my $host = 'localhost:8080';
+  my $port = '3306';
+  my $database = 'gym-flex';
+  my $uid = 'root';
+  my $pwd = 'MySqlPass!?';
+  my $dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
+
+  my $application_db = Application::User_Accounts->connect($dsn);
+    $self->helper(application_db => sub { return $application_db; });
+=cut
+  return Application::User_Accounts->connect('DBI:ODBC:DRIVER={SQL Server};SERVER=ENNTEST;DATABASE=test;, test, test');
+};
+
 sub startup {
   my $self = shift;
    $self->defaults(layout => 'default');
@@ -21,15 +37,7 @@ sub startup {
   # Load configuration from hash returned by "my_app.conf"
   my $config = $self->plugin('Config');
 
-  my $host = 'localhost:8080';
-  my $port = '3306';
-  my $database = 'gym-flex';
-  my $uid = 'root';
-  my $pwd = 'MySqlPass!?';
-  my $dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
 
-  my $application_db = Application::User_Accounts->connect($dsn);
-    $self->helper(application_db => sub { return $application_db; });
 
     $self->helper(log_users_action => sub {
       my $self = shift;
@@ -44,7 +52,7 @@ sub startup {
         $date_time = "$date $time";
 
 
-      $self->application_db->resultset('ActionLog')->create({
+      $self->app->application_db->resultset('ActionLog')->create({
         action_id => $action_id,
         date_time => $date_time,
         user_id => $user_id,
@@ -80,9 +88,9 @@ sub startup {
     });
 
   $self->plugin('PODRenderer') if $config->{perldoc};
-=pod
+
   my $hashed_pass = hash_this('Passw0rd!?');
-  $self->application_db->resultset('Employee')->create({
+  $self->app->application_db->resultset('Employee')->create({
     first_name => 'Greg',
     last_name =>  'Flynn',
     screen_name => 'gflynn',
@@ -91,17 +99,16 @@ sub startup {
     role => '3',
     password => $hashed_pass
   });
-=cut
 
   my $r = $self->routes;
 
-  $r->get('/')->name('login_form')->to(template => 'account/login_form');
-  $r->post('/')->name('do_login')->to('Account#login');
+  $r->get('/gym-flex')->name('login_form')->to(template => 'account/login_form');
+  $r->post('/gym-flex')->name('do_login')->to('Account#login');
 
   $r->route('/logout')->name('do_logout')->to(cb => sub {
    my $self = shift;
 
-      my $user = $self->application_db->resultset('Employee')->search({uid => $self->session('user_id')});
+      my $user = $self->app->application_db->resultset('Employee')->search({uid => $self->session('user_id')});
         $user = $user->first;
         $self->log_users_action(2);
 
@@ -126,6 +133,8 @@ sub startup {
 
   $authorized->get('/change_password')->name('change_password_form')->to('Account#change_password_form');
   $authorized->post('/change_password')->name('change_password')->to('Account#change_password');
+
+  $authorized->get('/dashboard')->name('workout_dashboard')->to(template => 'workouts/index');
 
   my $admin_authorized = $r->under('/admin')->to('Account#is_admin_logged_in');
 

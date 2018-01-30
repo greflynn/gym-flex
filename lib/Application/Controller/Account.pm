@@ -15,7 +15,7 @@ sub user_exists
 
     if(defined $password && $password ne '')
     {
-      my $user_result_set = $self->application_db->resultset('Employee');
+      my $user_result_set = $self->app->application_db->resultset('Employee');
       my $search_results;
 
       if($user_name =~ m/\@/)
@@ -48,11 +48,11 @@ sub login
   if($user_name =~ m /\@/)
   {
     my $email = $user_name;
-    $user_results = $self->application_db->resultset('Employee')->search({email => $email});
+    $user_results = $self->app->application_db->resultset('Employee')->search({email => $email});
   }
   else
   {
-    $user_results = $self->application_db->resultset('Employee')->search({screen_name => $user_name});
+    $user_results = $self->app->application_db->resultset('Employee')->search({screen_name => $user_name});
   }
   my $existing_user = $user_results->first;
 
@@ -70,8 +70,7 @@ sub login
 
       $self->log_users_action(1, "Success");
 
-      my $home_page = home_page_for($existing_user);
-       $self->redirect_to($home_page);
+       $self->redirect_to('workout_dashboard');
     }
     else
     {
@@ -119,7 +118,7 @@ sub details
 {
     my $self = shift;
     my $user_id = $self->session('user_id');
-    my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+    my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
     my $user = $user_results->first;
 
      $self->stash(user => $user);
@@ -131,7 +130,7 @@ sub edit_form
   my $self = shift;
 
   my $user_id = $self->param('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
 
    $self->stash(user => $user);
@@ -147,7 +146,7 @@ sub edit
   my $email = $self->param('email');
   my $screen_name = $self->param('screen_name');
   my $user_id = $self->param('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
 
   my $additional_info = '';
@@ -176,7 +175,7 @@ sub change_password_form
   my $self = shift;
 
   my $user_id = $self->session('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
     $self->stash(user => $user);
     $self->render(template => 'account/change_password');
@@ -187,7 +186,7 @@ sub change_password
   my $self = shift;
 
   my $user_id = $self->session('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
 
   my $users_password = defined $user->password ? $user->password : $user->recovery_code;
@@ -226,7 +225,7 @@ sub forgot_password
   my $self = shift;
 
   my $email = $self->param('email');
-  my $user_results = $self->application_db->resultset('Employee')->search({email => $email});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({email => $email});
   my $user = $user_results->first;
 
   if($user)
@@ -268,7 +267,7 @@ sub recover
     $temporary_code = trim($temporary_code);
   my $user_id = $self->param('user_id');
 
-  my $user_results = $self->application_db->resultset('Employee')->search({employee_id => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({employee_id => $user_id});
   my $user = $user_results->first;
 
   if($user)

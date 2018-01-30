@@ -10,7 +10,7 @@ use Mojo::Base 'Mojolicious::Controller';
 sub dashboard
 {
   my $self = shift;
-  my @anonymous_user_actions = $self->application_db->resultset('ActionLog')->search({user_id => undef}, {order_by => 'id'});
+  my @anonymous_user_actions = $self->app->application_db->resultset('ActionLog')->search({user_id => undef}, {order_by => 'id'});
    $self->stash(anonymous_user_actions => \@anonymous_user_actions);
 
    $self->render(template => 'user/dashboard');
@@ -19,7 +19,7 @@ sub dashboard
 sub index
 {
   my $self = shift;
-  my @users = $self->application_db->resultset('Employee')->search({});
+  my @users = $self->app->application_db->resultset('Employee')->search({});
 
   $self->stash(users => \@users);
   $self->render(template => 'user/index');
@@ -29,7 +29,7 @@ sub add_form
 {
   my $self = shift;
 
-  my @roles = $self->application_db->resultset('Role')->search({});
+  my @roles = $self->app->application_db->resultset('Role')->search({});
    $self->stash(roles => \@roles);
    $self->render(template => 'user/add');
 }
@@ -65,13 +65,13 @@ sub add
       $email = $user->email;
   }
 
-  my $user_results_by_screen_name = $self->application_db->resultset('Employee')->search({screen_name => $screen_name});
+  my $user_results_by_screen_name = $self->app->application_db->resultset('Employee')->search({screen_name => $screen_name});
   my $user_with_screen_name = $user_results_by_screen_name->first;
 
-  my $user_results_by_id = $self->application_db->resultset('Employee')->search({employee_id => $user_id});
+  my $user_results_by_id = $self->app->application_db->resultset('Employee')->search({employee_id => $user_id});
   my $user_with_id = $user_results_by_id->first;
 
-  my $user_results_by_email = $self->application_db->resultset('Employee')->search({email => $email});
+  my $user_results_by_email = $self->app->application_db->resultset('Employee')->search({email => $email});
   my $user_with_email = $user_results_by_email->first;
 
   if(defined $user_with_screen_name || defined $user_with_id)
@@ -82,7 +82,7 @@ sub add
   }
   else
   {
-    $self->application_db->resultset('Employee')->create({
+    $self->app->application_db->resultset('Employee')->create({
       first_name => $first_name,
       last_name =>  $last_name,
       screen_name => $screen_name,
@@ -114,9 +114,9 @@ sub edit_form
   my $self = shift;
 
   my $user_id = $self->param('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
-  my @roles = $self->application_db->resultset('Role')->search({});
+  my @roles = $self->app->application_db->resultset('Role')->search({});
 
    $self->stash(roles => \@roles);
    $self->stash(user => $user);
@@ -129,7 +129,7 @@ sub edit
 
   my $role = $self->param('role');
   my $user_id = $self->param('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
   my $screen_name = $user->screen_name;
 
@@ -147,7 +147,7 @@ sub delete
   my $self = shift;
 
   my $user_id = $self->param('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
   my $user_screen_name = $user->screen_name;
     $user->delete;
@@ -163,10 +163,10 @@ sub details
   my $self = shift;
 
   my $user_id = $self->param('user_id');
-  my $user_results = $self->application_db->resultset('Employee')->search({uid => $user_id});
+  my $user_results = $self->app->application_db->resultset('Employee')->search({uid => $user_id});
   my $user = $user_results->first;
 
-  my @actions = $self->application_db->resultset('ActionLog')->search({user_id => $user_id}, {order_by => 'id'});
+  my @actions = $self->app->application_db->resultset('ActionLog')->search({user_id => $user_id}, {order_by => 'id'});
 
   $self->stash(users_actions => \@actions);
   $self->stash(user => $user);
