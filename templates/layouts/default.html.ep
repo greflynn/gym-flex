@@ -54,7 +54,7 @@
       <ul class="nav navbar-nav">
         % my $logged_in = $self->session('logged_in');
         % if ($logged_in) {
-          % if ($self->session('role') eq 'RID00000002') {
+          % if ($self->session('role') == 3) {
             <li class="active">
               %= link_to 'Home' => 'workout_dashboard'
             </li>

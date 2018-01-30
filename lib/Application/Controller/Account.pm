@@ -106,7 +106,7 @@ sub is_admin_logged_in
 {
   my $self = shift;
 
-  if ($self->session('logged_in') eq '1' && $self->session('role') eq 'RID00000002')
+  if ($self->session('logged_in') eq '1' && $self->session('role') == 3)
   {
     return 1;
   }

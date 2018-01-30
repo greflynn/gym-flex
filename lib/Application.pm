@@ -88,7 +88,7 @@ sub startup {
     });
 
   $self->plugin('PODRenderer') if $config->{perldoc};
-
+=pod
   my $hashed_pass = hash_this('Passw0rd!?');
   $self->app->application_db->resultset('Employee')->create({
     first_name => 'Greg',
@@ -99,6 +99,7 @@ sub startup {
     role => '3',
     password => $hashed_pass
   });
+=cut
 
   my $r = $self->routes;
 
