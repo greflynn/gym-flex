@@ -1,5 +1,5 @@
 use utf8;
-package Application::User_Accounts::Result::Role;
+package Schema::Result::Role;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -21,8 +21,8 @@ __PACKAGE__->add_columns(
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.07047 @ 2017-07-17 12:53:45
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8rsxd0gOJw2Mv4bSaAhMUQ
+# Created by DBIx::Class::Schema::Loader v0.07047 @ 2018-01-30 13:58:42
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:xrckt3n+gWLFebx8y7K2tw
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

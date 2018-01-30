@@ -13,7 +13,8 @@ my $port = '3306';
 my $database = 'gym-flex';
 my $uid = 'root';
 my $pwd = 'MySqlPass!?';
-my @dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
+#my @dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
+my @dsn = 'DBI:ODBC:DRIVER={SQL Server};SERVER=ENNTEST;DATABASE=test;, test, test';
 #my @dsn = 'dbi:ODBC:driver={SQL Server};Server=ENNTEST;database=AnimalControlApp-DEV;network=COVDNSSRV;';
 
 my $options = {

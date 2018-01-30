@@ -29,8 +29,7 @@ sub startup {
 
    $self->plugin('RemoteAddr');
 
-   $self->secrets(['New Session {SSHA512}7HiYMvkAX9cOSjFhZKGepFKVlBdoWskRVjwHZ8G6Xj9I5JnXNytTWW3VyDr/Chjyy9izPPtmarXWff+8TMnbFuX63jk= AG Development',
-      'Validation AG Development LeYTmFPhw3qZmguKrPTZhWnsLeYTmFPhw3qJmqCjyGZmguK']);
+   $self->secrets(['New Session {SSHA512}7HiYMvkAX9cOSjFhZKGepFKVlBdoWskRVjwHZ8G6Xj9I5JnXNytTWW3VyDr/Chjyy9izPPtmarXWff+8TMnbFuX63jk= AG Development']);
 
     $self->app->sessions->default_expiration('600');# Expiration reduced to 10 Minutes
 
