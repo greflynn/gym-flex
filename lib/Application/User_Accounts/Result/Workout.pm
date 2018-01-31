@@ -23,11 +23,13 @@ __PACKAGE__->add_columns(
   { data_type => "nchar", is_nullable => 1, size => 10 },
   "workout_id",
   { data_type => "integer", is_nullable => 1 },
+  "user_id",
+  { data_type => "varchar", is_nullable => 1, size => 11 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07047 @ 2018-01-30 13:58:42
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:PfCFn89ozEuozlFKEMwy8A
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2018-01-31 12:54:53
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:sitIY2i/e9DJlmXi0Vs4Wg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

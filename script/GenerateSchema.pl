@@ -24,7 +24,7 @@ my $options = {
   generate_pod   => 0,
 };
 
-make_schema_at(Schema => $options, \@dsn);
+make_schema_at('Application::User_Accounts' => $options, \@dsn);
 
 =head1 NAME
 generate_dbic_schema

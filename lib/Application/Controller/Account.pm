@@ -1,8 +1,5 @@
 package Application::Controller::Account;
-BEGIN
-{
-  unshift @INC, '\\\\erp311script\Library\StrawberryPerl';
-}
+
 use Mojo::Base 'Mojolicious::Controller';
 use General::Tools;
 use File::Basename;

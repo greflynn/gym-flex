@@ -1,8 +1,5 @@
 package Application::Controller::User;
 
-BEGIN{
-  unshift @INC, '\\\\erp311script\Library\StrawberryPerl';
-}
 use General::Tools;
 use Mojo::Base 'Mojolicious::Controller';
 

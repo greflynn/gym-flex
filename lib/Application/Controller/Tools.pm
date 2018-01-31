@@ -1,8 +1,5 @@
 package Tools;
 #use strict;
-BEGIN{
-  unshift @INC, '\\\\erp311script\library\StrawberryPerl';
-}
 
 use MIME::Lite;
 use warnings;

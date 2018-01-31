@@ -87,7 +87,7 @@ sub startup {
     });
 
   $self->plugin('PODRenderer') if $config->{perldoc};
-=pod
+
   my $hashed_pass = hash_this('Passw0rd!?');
   $self->app->application_db->resultset('Employee')->create({
     first_name => 'Greg',
@@ -98,7 +98,6 @@ sub startup {
     role => '3',
     password => $hashed_pass
   });
-=cut
 
   my $r = $self->routes;
     $r = $r->under('/gym-flex');
@@ -135,7 +134,10 @@ sub startup {
   $authorized->get('/change_password')->name('change_password_form')->to('Account#change_password_form');
   $authorized->post('/change_password')->name('change_password')->to('Account#change_password');
 
-  $authorized->get('/dashboard')->name('workout_dashboard')->to(template => 'workouts/index');
+  $authorized->get('/workout_index')->name('workout_index')->to(template => 'workouts/index');
+
+  $authorized->get('/add_workout')->name('add_workout_form')->to('Workouts#add_form');
+  $authorized->post('/add_workout')->name('add_workout')->to('Workouts#add');
 
   my $admin_authorized = $r->under('/admin')->to('Account#is_admin_logged_in');
 
