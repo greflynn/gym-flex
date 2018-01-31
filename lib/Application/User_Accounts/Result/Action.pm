@@ -1,5 +1,5 @@
 use utf8;
-package Schema::Result::Action;
+package Application::User_Accounts::Result::Action;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
