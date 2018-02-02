@@ -125,6 +125,7 @@ sub startup {
 
   my $authorized = $r->under('/')->to('Account#is_logged_in');
 
+  #-ACCOUNT
   $authorized->get('/account_details')->name('account_details')->to('Account#details');
   $authorized->post('/account_details')->name('account_details_post')->to('Account#details');
 
@@ -134,10 +135,15 @@ sub startup {
   $authorized->get('/change_password')->name('change_password_form')->to('Account#change_password_form');
   $authorized->post('/change_password')->name('change_password')->to('Account#change_password');
 
+  #-WORKOUT
   $authorized->get('/workout_index')->name('workout_index')->to(template => 'workouts/index');
 
   $authorized->get('/add_workout')->name('add_workout_form')->to('Workouts#add_form');
   $authorized->post('/add_workout')->name('add_workout')->to('Workouts#add');
+
+  #-EXERCISE
+  $authorized->get('/add_exercise')->name('add_exercise_form')->to(template => 'exercise/add');
+  $authorized->post('/add_exercise')->name('add_exercise')->to('Exercises#add');
 
   my $admin_authorized = $r->under('/admin')->to('Account#is_admin_logged_in');
 
