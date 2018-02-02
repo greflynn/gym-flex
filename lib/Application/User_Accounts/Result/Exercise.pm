@@ -12,7 +12,7 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 __PACKAGE__->table("Exercise");
 __PACKAGE__->add_columns(
   "id",
-  { data_type => "integer", is_nullable => 0 },
+  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "exercise",
   { data_type => "varchar", is_nullable => 1, size => 50 },
   "description",

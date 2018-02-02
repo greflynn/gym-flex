@@ -143,7 +143,7 @@ sub startup {
 
   #-EXERCISE
   $authorized->get('/add_exercise')->name('add_exercise_form')->to(template => 'exercise/add');
-  $authorized->post('/add_exercise')->name('add_exercise')->to('Exercises#add');
+  $authorized->post('/add_exercise')->name('add_exercise')->to('Exercise#add');
 
   my $admin_authorized = $r->under('/admin')->to('Account#is_admin_logged_in');
 

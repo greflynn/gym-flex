@@ -3,7 +3,7 @@
 
 <h3>Add Exercise</h3><hr>
 
-%= form_for '#' => (metod => 'POST') => begin
+%= form_for 'add_exercise' => (metod => 'POST') => begin
 
   %= label_for 'exercise' => 'Exercise'
   %= text_field 'exercise', class => 'form-control'
