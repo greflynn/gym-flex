@@ -142,6 +142,8 @@ sub startup {
   $authorized->post('/add_workout')->name('add_workout')->to('Workouts#add');
 
   #-EXERCISE
+  $authorized->get('/exercise_index')->name('exercise_index')->to('Exercise#index');
+
   $authorized->get('/add_exercise')->name('add_exercise_form')->to(template => 'exercise/add');
   $authorized->post('/add_exercise')->name('add_exercise')->to('Exercise#add');
 

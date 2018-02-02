@@ -5,6 +5,16 @@ use File::Basename;
 use lib dirname(__FILE__);
 
 
+sub index
+{
+  my $self = shift;
+
+  my @exercises = $self->app->application_db->resultset('Exercise')->search({});
+
+  $self->stash(exercises => \@exercises);
+  $self->render(template => 'exercise/index');
+}
+
 sub add
 {
   my $self = shift;

@@ -1,0 +1,47 @@
+% title 'Exercise Index';
+% if(!defined $self->session('logged_in')){ $self->log_users_action(8, 'User Index') };
+<h1>Exercises</h1>
+<hr>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Exercise</th>
+      <th>Muscle Group</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+  % for my $exercise (@$exercises) {
+    <tr>
+      <td>
+        <%= $exercise->exercise %>
+      </td>
+      <td>
+        <%= $exercise->muscle_group %>
+      </td>
+      <td>
+        <%= $exercise->description %>
+      </td>
+
+
+      <td>
+        %= form_for 'exercise_edit_form' => (method => 'GET') => begin
+          %= submit_button 'Edit', class => 'btn btn-success'
+          %= hidden_field exercise_id => $exercise->user_id
+        % end
+      </td>
+
+      <td>
+        <form action="/delete_exercise" onsubmit="return confirm('Are you sure you want to delete this exercise?');">
+            %= submit_button 'Delete', class => 'btn btn-danger'
+            %= hidden_field exercise_id => $exercise->user_id
+        </form>
+      </td>
+    </tr>
+  % }
+  </tbody>
+  </table>
+
+<div class="row" align="center">
+  %= link_to Add => 'add_exercise_form', class => 'btn btn-success form-control'
+</div>
