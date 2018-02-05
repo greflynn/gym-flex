@@ -67,7 +67,7 @@ sub login
 
       $self->log_users_action(1, "Success");
 
-       $self->redirect_to('workout_dashboard');
+       $self->redirect_to('workout_index');
     }
     else
     {

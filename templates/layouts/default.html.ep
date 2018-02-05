@@ -52,16 +52,12 @@
       <ul class="nav navbar-nav">
         % my $logged_in = $self->session('logged_in');
         % if ($logged_in) {
+          <li class="active">
+            %= link_to 'Home' => 'workout_index'
+          </li>
           % if ($self->session('role') == 3) {
-            <li class="active">
-              %= link_to 'Home' => 'workout_dashboard'
-            </li>
             <li>
                 %= link_to 'Users' => 'user_index'
-            </li>
-          % } else {
-            <li class="active">
-              %= link_to 'Home' => 'workout_dashboard'
             </li>
           % }
           <li>
@@ -76,7 +72,7 @@
           % if ($self->session('logged_in') eq '') {
             <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           % } else {
-            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            <li><a href="/gym-flex/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
           % }
         % }
       </ul>
