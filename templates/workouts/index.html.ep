@@ -1,3 +1,6 @@
 % title 'Workout Dashboard';
 
 Dashboard
+
+
+%= link_to Add => 'add_workout_form', class => 'btn btn-success'

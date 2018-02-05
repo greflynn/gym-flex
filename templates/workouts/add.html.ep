@@ -1,10 +1,12 @@
 % title 'Add Workout';
 
-Add workout
+<h2>Add workout</h2>
+<hr>
+
 
 %= form_for '#' => (metod => 'POST') => begin
   <div class="input-group">
-    <select class="form-control" id="exercises" name="exercise">
+    <select id="exercises" name="exercise" class="form-control">
 
     </select>
   </div>
@@ -12,8 +14,10 @@ Add workout
 
   % if(defined(stash('exercises'))) {
     % foreach my $exercise (@{$exercises}) {
+      %= hidden_field exercise_id => $exercise->{id}, id => 'exercise_id'
+      %= hidden_field exercise => $exercise->{exercise}, id => 'exercise'
       <script>
-        var exercise = '<option value="'+<%= $exercise->{id}+'">'+<%= $exercise->{exercise} %> + '</option>';
+        var exercise = '<option value="'+ $('#exercise_id').val() +'">'+ $('#exercise').val() + '</option>';
         $('#exercises').append(exercise);
       </script>
     % }
