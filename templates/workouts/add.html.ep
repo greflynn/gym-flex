@@ -36,10 +36,39 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <div class="input-group">
-            <select id="exercises" name="exercise" class="form-control">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="input-group">
+                %= select_field exercises => [], id => 'exercises', class => 'form-control'
+              </div>
+            </div>
 
-            </select>
+            <div class="col-md-4">
+              <div class="col-md-6">
+                %= select_field set_part1 => [0,1,2,3,4,5,6,7,8,9], id => 'set_part1', class => 'form-control'
+              </div>
+
+              <div class="col-md-6">
+                %= select_field set_part2 => [0,1,2,3,4,5,6,7,8,9], id => 'set_part2', class => 'form-control'
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Set</th>
+                  <th>Reps</th>
+                  <th>Weight</th>
+                </tr>
+              </thead>
+              <tbody id="set_list">
+
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="modal-footer">
@@ -63,3 +92,39 @@
   % }
 
 % end
+
+<script>
+  $('#set_part1').change(function(){
+    $('#set_list').empty();
+    var set_part1 = $('#set_part1').val();
+    var set_part2 = $('#set_part2').val();
+    var sets = set_part1 + set_part2;
+
+    for(var i = 0; i < sets; i++)
+    {
+      var set = '<tr><td>'+ $('#exercise').val() + '</td>' + '<td>' + i + '</td>' +
+      '<td><input type="number" id="set_'+ i + '_reps "></td>' +
+      '<td><input type="number" id="set_'+ i + '_weight "></td>' +
+      '</tr>';
+
+      $('#set_list').append(set);
+    }
+  });
+
+  $('#set_part2').change(function(){
+    $('#set_list').empty();
+    var set_part1 = $('#set_part1').val();
+    var set_part2 = $('#set_part2').val();
+    var sets = set_part1 + set_part2;
+
+    for(var i = 0; i < sets; i++)
+    {
+      var set = '<tr><td>'+ $('#exercise').val() + '</td>' + '<td>' + i + '</td>' +
+      '<td><input type="number" id="set_'+ i + '_reps "></td>' +
+      '<td><input type="number" id="set_'+ i + '_weight "></td>' +
+      '</tr>';
+
+      $('#set_list').append(set);
+    }
+  });
+</script>
