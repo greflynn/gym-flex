@@ -33,7 +33,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">Add Exercise To Workout</h4>
         </div>
         <div class="modal-body">
           <div class="row">
@@ -54,7 +54,6 @@
             </div>
           </div>
 
-
           <div class="row">
             <table class="table table-hover">
               <thead>
@@ -71,8 +70,11 @@
             </table>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        <div class="modal-footer" align="center">
+          <div class="row" align="center">
+            <button class="btn btn-success" id="add_exercise_btn")>Add</button>
+          </div>
         </div>
       </div>
 
@@ -103,8 +105,8 @@
     for(var i = 0; i < sets; i++)
     {
       var set = '<tr><td>'+ $('#exercise').val() + '</td>' + '<td>' + i + '</td>' +
-      '<td><input type="number" id="set_'+ i + '_reps "></td>' +
-      '<td><input type="number" id="set_'+ i + '_weight "></td>' +
+      '<td><input type="number" id="set_'+ i + '_reps"></td>' +
+      '<td><input type="number" id="set_'+ i + '_weight"></td>' +
       '</tr>';
 
       $('#set_list').append(set);
@@ -120,11 +122,43 @@
     for(var i = 0; i < sets; i++)
     {
       var set = '<tr><td>'+ $('#exercise').val() + '</td>' + '<td>' + i + '</td>' +
-      '<td><input type="number" id="set_'+ i + '_reps "></td>' +
-      '<td><input type="number" id="set_'+ i + '_weight "></td>' +
+      '<td><input type="number" id="set_'+ i + '_reps"></td>' +
+      '<td><input type="number" id="set_'+ i + '_weight"></td>' +
       '</tr>';
 
       $('#set_list').append(set);
     }
   });
+
+  document.getElementById("add_exercise_btn").addEventListener("click", add_exercise_to_workout);
+  function add_exercise_to_workout()
+  {
+    var set_part1 = $('#set_part1').val();
+    var set_part2 = $('#set_part2').val();
+    var sets = set_part1 + set_part2;
+    var exercise = $('#exercise').val();
+
+    var reps = '';
+    var weight = '';
+
+    for (var i = 0; i < sets; i++)
+    {
+      var rep_id = '#set_'+i+'_reps';
+      var weight_id = '#set_'+i+'_weight';
+
+      var reps = $(rep_id).val();
+      var weight = $(weight_id).val();
+
+      alert('RepID: ' + rep_id +', Reps: ' + reps);
+      alert('WeightID: ' + weight_id + ', Weight: ' + weight);
+
+      reps += reps + ', ';
+      weight += weight + ', ';
+    }
+
+    var exercise_row = '<tr><td>'+exercise+'</td><td>'+sets+'</td><td>'+reps+'</td><td>'+weight+'</td></tr>';
+    alert(exercise_row);
+
+    $('#workout').append(exercise_row);
+  }
 </script>
