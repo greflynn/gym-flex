@@ -4,7 +4,6 @@
 <hr>
 
 
-%= form_for '#' => (metod => 'POST') => begin
   <table class="table table-hover">
     <thead>
       <tr>
@@ -35,47 +34,48 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Add Exercise To Workout</h4>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="input-group">
-                %= select_field exercises => [], id => 'exercises', class => 'form-control'
+          <div class="modal-body">
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="input-group">
+                  %= select_field exercises => [], id => 'exercises', class => 'form-control'
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="col-md-6">
+                  %= select_field set_part1 => [0,1,2,3,4,5,6,7,8,9], id => 'set_part1', class => 'form-control'
+                </div>
+
+                <div class="col-md-6">
+                  %= select_field set_part2 => [0,1,2,3,4,5,6,7,8,9], id => 'set_part2', class => 'form-control'
+                </div>
               </div>
             </div>
 
-            <div class="col-md-4">
-              <div class="col-md-6">
-                %= select_field set_part1 => [0,1,2,3,4,5,6,7,8,9], id => 'set_part1', class => 'form-control'
-              </div>
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Exercise</th>
+                    <th>Set</th>
+                    <th>Reps</th>
+                    <th>Weight</th>
+                  </tr>
+                </thead>
+                <tbody id="set_list">
 
-              <div class="col-md-6">
-                %= select_field set_part2 => [0,1,2,3,4,5,6,7,8,9], id => 'set_part2', class => 'form-control'
-              </div>
+                </tbody>
+              </table>
             </div>
           </div>
 
-          <div class="row">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Exercise</th>
-                  <th>Set</th>
-                  <th>Reps</th>
-                  <th>Weight</th>
-                </tr>
-              </thead>
-              <tbody id="set_list">
-
-              </tbody>
-            </table>
+          <div class="modal-footer" align="center">
+            <div class="row" align="center">
+              <input type="submit" class="btn btn-success" id="add_exercise_btn" value="Add">
+            </div>
           </div>
-        </div>
-
-        <div class="modal-footer" align="center">
-          <div class="row" align="center">
-            <button class="btn btn-success" id="add_exercise_btn")>Add</button>
-          </div>
-        </div>
       </div>
 
     </div>
@@ -93,14 +93,13 @@
     % }
   % }
 
-% end
 
 <script>
   $('#set_part1').change(function(){
     $('#set_list').empty();
     var set_part1 = $('#set_part1').val();
     var set_part2 = $('#set_part2').val();
-    var sets = set_part1 + set_part2;
+    var sets = parseInt(set_part1 + set_part2);
 
     for(var i = 0; i < sets; i++)
     {
@@ -146,19 +145,16 @@
       var rep_id = '#set_'+i+'_reps';
       var weight_id = '#set_'+i+'_weight';
 
-      var reps = $(rep_id).val();
-      var weight = $(weight_id).val();
+      var reps_value = $(rep_id).val();
+      var weight_value = $(weight_id).val();
 
-      alert('RepID: ' + rep_id +', Reps: ' + reps);
-      alert('WeightID: ' + weight_id + ', Weight: ' + weight);
-
-      reps += reps + ', ';
-      weight += weight + ', ';
+      reps += reps_value + ', ';
+      weight += weight_value + ', ';
     }
 
     var exercise_row = '<tr><td>'+exercise+'</td><td>'+sets+'</td><td>'+reps+'</td><td>'+weight+'</td></tr>';
-    alert(exercise_row);
 
     $('#workout').append(exercise_row);
+    $('#myModal').modal('hide');
   }
 </script>
