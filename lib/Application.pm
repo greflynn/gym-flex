@@ -7,18 +7,18 @@ use General::Tools;
 # This method will run once at server start
 
 has application_db => sub {
-=pod
+
   my $host = 'localhost:8080';
   my $port = '3306';
   my $database = 'gym-flex';
   my $uid = 'root';
-  my $pwd = 'MySqlPass!?';
+  my $pwd = 'PhpMyAdminPass!?';
   my $dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
 
   my $application_db = Application::User_Accounts->connect($dsn);
-    $self->helper(application_db => sub { return $application_db; });
-=cut
-  return Application::User_Accounts->connect('DBI:ODBC:DRIVER={SQL Server};SERVER=ENNTEST;DATABASE=test;, test, test');
+    return $application_db;
+
+  #return Application::User_Accounts->connect('DBI:ODBC:DRIVER={SQL Server};SERVER=ENNTEST;DATABASE=test;, test, test');
 };
 
 sub startup {
@@ -27,7 +27,6 @@ sub startup {
    $self->session(logged_in => '');
    $self->session(role => '');
 
-   $self->plugin('RemoteAddr');
 
    $self->secrets(['New Session {SSHA512}7HiYMvkAX9cOSjFhZKGepFKVlBdoWskRVjwHZ8G6Xj9I5JnXNytTWW3VyDr/Chjyy9izPPtmarXWff+8TMnbFuX63jk= AG Development']);
 
@@ -43,7 +42,7 @@ sub startup {
       my $action_id = shift;
       my $additional_info = shift;
 
-      my $users_ip = $self->remote_addr;
+      my $users_ip = "";
       my $user_id = $self->session('user_id');
       my $date_time = DateTime->now;
       my $date = $date_time->ymd;
