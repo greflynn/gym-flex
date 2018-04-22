@@ -65,7 +65,7 @@
           </li>
 
           <li>
-            %= link_to 'Exercise' => 'add_exercise_form'
+            %= link_to 'Workouts' => 'workout_index'
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

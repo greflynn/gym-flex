@@ -23,6 +23,9 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 11 },
 );
 
+__PACKAGE__->set_primary_key("id");
+
+
 
 # Created by DBIx::Class::Schema::Loader v0.07048 @ 2018-01-31 12:54:53
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/bSU0++de5oGP6La74wHvQ

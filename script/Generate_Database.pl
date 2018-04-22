@@ -16,10 +16,10 @@ my $host = 'localhost:8080';
 my $port = '3306';
 my $database = 'gym-flex';
 my $uid = 'root';
-my $pwd = 'MySqlPass!?';
+my $pwd = 'PhpMyAdminPass!?';
 my $dsn = "DBI:mysql:database=$database;host=$host;port=$port;user=$uid;password=$pwd";
-#my $schema = Application::User_Accounts->connect($dsn);
-my $schema = Application::User_Accounts->connect('DBI:ODBC:DRIVER={SQL Server};SERVER=ENNTEST;DATABASE=test;, test, test');
+my $schema = Application::User_Accounts->connect($dsn);
+#my $schema = Application::User_Accounts->connect('DBI:ODBC:DRIVER={SQL Server};SERVER=ENNTEST;DATABASE=test;, test, test');
  $schema->deploy();
 
 my @in_all_actions = ("Log In", "Log Out", "Edit Account Info", "Change Password", "Request Temporary Password", "Recover Account", "Visit Page");
